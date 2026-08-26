@@ -1,0 +1,391 @@
+/* ==========================================================================
+   kreativstep — Design Tokens
+   Feminin, romantisch, elegant & reduziert. Viel Weißraum, feine Serifen,
+   Rosa/Blush-Töne. Bilder großformatig im Vordergrund.
+   ========================================================================== */
+
+:root {
+  /* Farben */
+  --color-bg:        #FAF5F2;   /* warmes Off-White */
+  --color-bg-alt:     #F1E4DF;   /* zarter Blush für Flächen */
+  --color-text:       #3A3238;   /* warmes Anthrazit-Plum statt Schwarz */
+  --color-text-soft:  #7A6B6C;   /* gedämpfter Fließtext-Ton */
+  --color-accent:     #C48B87;   /* Dusty Rose — Akzent */
+  --color-accent-deep:#9C5F5C;   /* dunkleres Rosé für Hover/Fokus */
+  --color-line:       #E4D3CE;   /* feine Trennlinien */
+  --color-surface:    #FFFFFF;
+
+  /* Typografie */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'Jost', 'Helvetica Neue', Arial, sans-serif;
+
+  --size-hero:   clamp(2.75rem, 6vw, 5.5rem);
+  --size-h1:     clamp(2.25rem, 4.5vw, 3.5rem);
+  --size-h2:     clamp(1.5rem, 2.6vw, 2.1rem);
+  --size-eyebrow: 0.75rem;
+  --size-body:   1.05rem;
+
+  /* Abstände */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 7rem;
+
+  --max-width: 1180px;
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--size-body);
+  line-height: 1.7;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; margin: 0; padding: 0; }
+
+h1, h2, h3, .display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--color-text);
+  margin: 0 0 var(--space-sm);
+  letter-spacing: 0.01em;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--size-eyebrow);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-accent-deep);
+  margin-bottom: var(--space-sm);
+}
+
+/* ---------- Signatur-Element: handgezeichnete Blüten-Trennlinie ----------
+   Statt nummerierter Marker (01/02/03) trägt dieses Motiv wiederkehrend
+   die "Handschrift" der Marke: eine einzelne, leicht unregelmäßige
+   Fließlinie mit einer kleinen Blütenknospe. Wird bewusst sparsam
+   eingesetzt — als Übergang zwischen Sektionen, nicht als Dekoration. */
+.flourish {
+  width: 120px;
+  height: 28px;
+  margin: var(--space-md) auto;
+  display: block;
+  color: var(--color-accent);
+}
+.flourish--left { margin-left: 0; }
+
+/* ---------- Layout ---------- */
+.wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+/* ---------- Header / Navigation ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(250, 245, 242, 0.88);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--color-line);
+}
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-sm);
+  padding-bottom: var(--space-sm);
+}
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 0.03em;
+}
+.logo em { font-style: italic; color: var(--color-accent-deep); }
+
+.nav-links { display: flex; gap: var(--space-md); }
+.nav-links a {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-soft);
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.25s ease;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 100%;
+  bottom: 0;
+  height: 1px;
+  background: var(--color-accent-deep);
+  transition: right 0.3s ease;
+}
+.nav-links a:hover,
+.nav-links a[aria-current="page"] {
+  color: var(--color-text);
+}
+.nav-links a:hover::after,
+.nav-links a[aria-current="page"]::after { right: 0; }
+
+.nav-toggle { display: none; }
+
+/* ---------- Hero ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-xl) 0 var(--space-lg);
+}
+.hero h1 { font-size: var(--size-hero); line-height: 1.05; }
+.hero h1 em { font-style: italic; color: var(--color-accent-deep); }
+.hero p {
+  max-width: 34ch;
+  color: var(--color-text-soft);
+  font-size: 1.1rem;
+}
+.hero-image {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.hero-image img { width: 100%; height: 100%; object-fit: cover; }
+
+.btn {
+  display: inline-block;
+  margin-top: var(--space-sm);
+  padding: 0.85rem 2rem;
+  border: 1px solid var(--color-text);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.btn:hover {
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+.btn--accent {
+  border-color: var(--color-accent-deep);
+  color: var(--color-accent-deep);
+}
+.btn--accent:hover {
+  background: var(--color-accent-deep);
+  border-color: var(--color-accent-deep);
+  color: #fff;
+}
+
+/* ---------- Sektionen allgemein ---------- */
+section { padding: var(--space-lg) 0; }
+.section-head {
+  text-align: center;
+  max-width: 46ch;
+  margin: 0 auto var(--space-lg);
+}
+
+/* ---------- Portfolio-Grid: gleichmäßiges Raster ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+.grid-item { text-decoration: none; }
+.grid-item figure { margin: 0; }
+.grid-item .thumb {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--color-bg-alt);
+}
+.grid-item .thumb img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.grid-item:hover .thumb img { transform: scale(1.045); }
+.grid-item figcaption {
+  padding-top: var(--space-xs);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.grid-item .work-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+}
+.grid-item .work-cat {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-soft);
+}
+
+/* ---------- Einzelprojekt ---------- */
+.project-header {
+  text-align: center;
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-md);
+}
+.project-header .meta {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  color: var(--color-text-soft);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+.project-hero-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  margin-bottom: var(--space-lg);
+}
+.project-hero-image img { width: 100%; height: 100%; object-fit: cover; }
+
+.project-body {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+.project-body .label {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent-deep);
+  margin-bottom: var(--space-xs);
+}
+.project-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+.project-gallery img { width: 100%; }
+.project-nav {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--color-line);
+  padding-top: var(--space-md);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+}
+
+/* ---------- Über mich ---------- */
+.about {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: var(--space-lg);
+  align-items: center;
+}
+.about-image {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+}
+.about-image img { width: 100%; height: 100%; object-fit: cover; }
+.about-content p { color: var(--color-text-soft); }
+
+/* ---------- Kontakt ---------- */
+.contact { max-width: 640px; margin: 0 auto; text-align: center; }
+.contact-form {
+  text-align: left;
+  margin-top: var(--space-lg);
+  display: grid;
+  gap: var(--space-md);
+}
+.field { display: flex; flex-direction: column; gap: 0.4rem; }
+.field label {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-soft);
+}
+.field input, .field textarea {
+  border: none;
+  border-bottom: 1px solid var(--color-line);
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-text);
+  padding: 0.6rem 0.2rem;
+  transition: border-color 0.25s ease;
+}
+.field input:focus, .field textarea:focus {
+  outline: none;
+  border-color: var(--color-accent-deep);
+}
+.contact-alt {
+  margin-top: var(--space-lg);
+  color: var(--color-text-soft);
+  font-size: 0.95rem;
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  border-top: 1px solid var(--color-line);
+  padding: var(--space-lg) 0;
+  text-align: center;
+  color: var(--color-text-soft);
+  font-size: 0.85rem;
+}
+.site-footer .footer-links {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+/* ---------- Fokus-Sichtbarkeit (Barrierefreiheit) ---------- */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--color-accent-deep);
+  outline-offset: 3px;
+}
+
+/* ---------- Reduzierte Bewegung ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .hero, .about, .project-body { grid-template-columns: 1fr; }
+  .hero-image { order: -1; }
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .project-gallery { grid-template-columns: 1fr; }
+  .nav-links {
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: var(--color-bg);
+    flex-direction: column;
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--color-line);
+    display: none;
+  }
+  .nav-links.open { display: flex; }
+  .nav-toggle {
+    display: inline-block;
+    background: none;
+    border: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: var(--color-text);
+  }
+}
+
+@media (max-width: 560px) {
+  .grid { grid-template-columns: 1fr; }
+}
